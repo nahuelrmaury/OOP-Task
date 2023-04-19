@@ -12,7 +12,7 @@ namespace Task_2
         static void Main(string[] args)
         {
             Bear bear = new Bear();
-            bear.Eat("XDXD","XDXDDDD");
+            bear.Eat("Animal Example","Plant Example");
             bear.NameSpecie();
             bear.NameParticularIndividual();
         }
@@ -109,18 +109,20 @@ namespace Task_2
     {
         public override string NameSpecie()
         {
+            Console.WriteLine("Ursidae");
             return "Ursidae";
         }
 
         public override string NameParticularIndividual()
         {
+            Console.WriteLine("Panda Bear");
             return "Panda Bear";
         }
 
         public string Eat(string animal, string plant)
         {
-            Console.WriteLine("Comida: " + animal + " y " + plant);
-            return animal;
+            Console.WriteLine("Eat: " + animal + " and " + plant);
+            return animal + " and " + plant;
         }
     }
 
@@ -128,17 +130,17 @@ namespace Task_2
     {
         public override string NameSpecie()
         {
-            Console.WriteLine("Name specie: Canis lupus");
+            Console.WriteLine("Canis lupus");
             return "Canis lupus";
         }
         public override string NameParticularIndividual()
         {
-            Console.WriteLine("Particular: canis lupus arctos");
+            Console.WriteLine("Canis lupus arctos");
             return "Canis lupus arctos";
         }
         public string Eat(string animal)
         {
-            Console.WriteLine("Comida: " + animal);
+            Console.WriteLine("Eat: " + animal);
             return animal;
         }
     }
@@ -147,15 +149,17 @@ namespace Task_2
     {
         public override string NameSpecie()
         {
+            Console.WriteLine("Oryctolagus cuniculos");
             return "Oryctolagus cuniculus";
         }
         public override string NameParticularIndividual()
         {
+            Console.WriteLine("Leporidae Romerolagus");
             return "Leporidae Romerolagus";
         }
         public string Eat(string plant)
         {
-            Console.WriteLine("Comida: " + plant);
+            Console.WriteLine("Eat: " + plant);
             return plant;
         }
     }
@@ -164,6 +168,7 @@ namespace Task_2
     {
         public override string NameSpecie()
         {
+            Console.WriteLine("Rosa rubiginosa");
             return "Rosa rubiginosa";
         }
     }
@@ -172,6 +177,7 @@ namespace Task_2
     {
         public override string NameSpecie()
         {
+            Console.WriteLine("Poaceae");
             return "Poaceae";
         }
     }
