@@ -12,7 +12,7 @@ namespace Task_2
         static void Main(string[] args)
         {
             Bear bear = new Bear();
-            bear.Eat("Animal Example","Plant Example");
+            bear.Eat("Animal food example","Plant food example");
             bear.NameSpecie();
             bear.NameParticularIndividual();
         }
@@ -28,81 +28,23 @@ namespace Task_2
         public abstract string NameParticularIndividual();
     }
 
-    public class Herbal : Alive
+    public abstract class Herbal : Alive
     {
-        public override string NameSpecie()
-        {
-            throw new NotImplementedException();
-        }
     }
 
-    public interface IHerbivore
+    public abstract class Herbivore : Animal
     {
-        void Eat(string plant);
+        public abstract string Eat(string plant);
     }
 
-    public interface ICarnivore
+    public abstract class Carnivore : Animal
     {
-        void Eat(string animal);
+        public abstract string Eat(string animal);
     }
 
-    public interface IOmnivore
+    public abstract class Omnivore : Animal
     {
-        void Eat(string animal, string plant);
-    }
-
-    public class Herbivore : Animal, IHerbivore
-    {
-        public void Eat(string animal)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string NameParticularIndividual()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string NameSpecie()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class Carnivore : Animal, ICarnivore
-    {
-        public void Eat(string animal)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string NameParticularIndividual()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string NameSpecie()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class Omnivore : Animal, IOmnivore
-    {
-        public void Eat(string animal, string plant)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string NameParticularIndividual()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string NameSpecie()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string Eat(string animal, string plant);
     }
 
     public class Bear : Omnivore
@@ -119,7 +61,7 @@ namespace Task_2
             return "Panda Bear";
         }
 
-        public string Eat(string animal, string plant)
+        public override string Eat(string animal, string plant)
         {
             Console.WriteLine("Eat: " + animal + " and " + plant);
             return animal + " and " + plant;
@@ -138,7 +80,7 @@ namespace Task_2
             Console.WriteLine("Canis lupus arctos");
             return "Canis lupus arctos";
         }
-        public string Eat(string animal)
+        public override string Eat(string animal)
         {
             Console.WriteLine("Eat: " + animal);
             return animal;
@@ -157,7 +99,7 @@ namespace Task_2
             Console.WriteLine("Leporidae Romerolagus");
             return "Leporidae Romerolagus";
         }
-        public string Eat(string plant)
+        public override string Eat(string plant)
         {
             Console.WriteLine("Eat: " + plant);
             return plant;
