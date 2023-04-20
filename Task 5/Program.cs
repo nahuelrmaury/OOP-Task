@@ -83,30 +83,33 @@ namespace Task_5
         /* overloading binary operator for add */
         public static Polynomial operator +(Polynomial firstPolynomial, Polynomial secondPolynomial)
         {
-            int maxLength = Math.Max(firstPolynomial.coefficients.Length, secondPolynomial.coefficients.Length);
+            int firstPolyLength = firstPolynomial.coefficients.Length;
+            int secondPolyLength = secondPolynomial.coefficients.Length;
+            int maxLength;
+            if (firstPolyLength < secondPolyLength)
+            {
+                maxLength = secondPolyLength;
+            }
+            else
+            {
+                maxLength = firstPolyLength;
+            }
+
             double[] polynomialResult = new double[maxLength];
 
             for (int i = 0; i < maxLength; i++)
             {
-                double firstPolynomialCoefficient;
-                double secondPolynomialCoefficient;
+                double firstPolynomialCoefficient = 0;
+                double secondPolynomialCoefficient = 0;
 
-                if (i < firstPolynomial.coefficients.Length)
+                if (i < firstPolyLength)
                 {
                     firstPolynomialCoefficient = firstPolynomial.coefficients[i];
                 }
-                else
-                {
-                    firstPolynomialCoefficient = 0;
-                }
 
-                if (i < secondPolynomial.coefficients.Length)
+                if (i < secondPolyLength)
                 {
                     secondPolynomialCoefficient = secondPolynomial.coefficients[i];
-                }
-                else
-                {
-                    secondPolynomialCoefficient = 0;
                 }
                 polynomialResult[i] = firstPolynomialCoefficient + secondPolynomialCoefficient;
             }
@@ -117,32 +120,32 @@ namespace Task_5
         /* overloading binary operator for substraction */
         public static Polynomial operator -(Polynomial firstPolynomial, Polynomial secondPolynomial)
         {
-            int maxLength = Math.Max(firstPolynomial.coefficients.Length, secondPolynomial.coefficients.Length);
+            int firstPolyLength = firstPolynomial.coefficients.Length;
+            int secondPolyLength = secondPolynomial.coefficients.Length;
+            int maxLength;
+            if (firstPolyLength < secondPolyLength)
+            {
+                maxLength = secondPolyLength;
+            }
+            else
+            {
+                maxLength = firstPolyLength;
+            }
             double[] polynomialResult = new double[maxLength];
 
             for (int i = 0; i < maxLength; i++)
             {
-                double firstPolynomialCoefficient;
-                double secondPolynomialCoefficient;
+                double firstPolynomialCoefficient = 0;
+                double secondPolynomialCoefficient = 0;
 
-                if (i < firstPolynomial.coefficients.Length)
+                if (i < firstPolyLength)
                 {
                     firstPolynomialCoefficient = firstPolynomial.coefficients[i];
                 }
-                else
-                {
-                    firstPolynomialCoefficient = 0;
-                }
-
-                if (i < secondPolynomial.coefficients.Length)
+                if (i < secondPolyLength)
                 {
                     secondPolynomialCoefficient = secondPolynomial.coefficients[i];
                 }
-                else
-                {
-                    secondPolynomialCoefficient = 0;
-                }
-
                 polynomialResult[i] = firstPolynomialCoefficient - secondPolynomialCoefficient;
             }
 
@@ -152,12 +155,14 @@ namespace Task_5
         /* overloading binary operator for multiplication */
         public static Polynomial operator *(Polynomial firstPolynomial, Polynomial secondPolynomial)
         {
-            int totalLength = firstPolynomial.coefficients.Length + secondPolynomial.coefficients.Length - 1;
+            int firstPolyLength = firstPolynomial.coefficients.Length;
+            int secondPolyLength = secondPolynomial.coefficients.Length;
+            int totalLength = firstPolyLength + secondPolyLength - 1;
             double[] polynomialResult = new double[totalLength];
 
-            for (int i = 0; i < firstPolynomial.coefficients.Length; i++)
+            for (int i = 0; i < firstPolyLength; i++)
             {
-                for (int j = 0; j < secondPolynomial.coefficients.Length; j++)
+                for (int j = 0; j < secondPolyLength; j++)
                 {
                     polynomialResult[i + j] += firstPolynomial.coefficients[i] * secondPolynomial.coefficients[j];
                 }
@@ -167,4 +172,3 @@ namespace Task_5
         }
     }
 }
-
