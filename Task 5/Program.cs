@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Task_5
 {
@@ -34,7 +29,7 @@ namespace Task_5
         /* method which returns a string representation of the polynomial */
         public override string ToString()
         {
-            string result = "";
+            StringBuilder result = new StringBuilder();
 
             for (int i = 0; i < coefficients.Length; i++)
             {
@@ -44,18 +39,18 @@ namespace Task_5
                     {
                         if (coefficients[i] < 0)
                         {
-                            result += "- ";
+                            result.Append("- ");
                         }
                     }
                     else
                     {
                         if (coefficients[i] > 0)
                         {
-                            result += " + ";
+                            result.Append(" + ");
                         }
                         else if (coefficients[i] < 0)
                         {
-                            result += " - ";
+                            result.Append(" - ");
                         }
                     }
 
@@ -63,90 +58,49 @@ namespace Task_5
 
                     if (absoluteCoefficients != 1 || i == 0)
                     {
-                        result += absoluteCoefficients;
+                        result.Append(absoluteCoefficients);
                     }
 
                     if (i > 0)
                     {
-                        result += "x";
+                        result.Append("x");
 
                         if (i > 1)
                         {
-                            result += "^" + i;
+                            result.Append("^" + i);
                         }
                     }
                 }
             }
-            return result;
+            return result.ToString();
         }
 
         /* overloading binary operator for add */
         public static Polynomial operator +(Polynomial firstPolynomial, Polynomial secondPolynomial)
         {
-            int firstPolyLength = firstPolynomial.coefficients.Length;
-            int secondPolyLength = secondPolynomial.coefficients.Length;
-            int maxLength;
-            if (firstPolyLength < secondPolyLength)
-            {
-                maxLength = secondPolyLength;
-            }
-            else
-            {
-                maxLength = firstPolyLength;
-            }
-
-            double[] polynomialResult = new double[maxLength];
-
-            for (int i = 0; i < maxLength; i++)
-            {
-                double firstPolynomialCoefficient = 0;
-                double secondPolynomialCoefficient = 0;
-
-                if (i < firstPolyLength)
-                {
-                    firstPolynomialCoefficient = firstPolynomial.coefficients[i];
-                }
-
-                if (i < secondPolyLength)
-                {
-                    secondPolynomialCoefficient = secondPolynomial.coefficients[i];
-                }
-                polynomialResult[i] = firstPolynomialCoefficient + secondPolynomialCoefficient;
-            }
-
-            return new Polynomial(polynomialResult);
+            return AddOrSubtractPolynomials(firstPolynomial, secondPolynomial, true);
         }
 
         /* overloading binary operator for substraction */
         public static Polynomial operator -(Polynomial firstPolynomial, Polynomial secondPolynomial)
         {
+            return AddOrSubtractPolynomials(firstPolynomial, secondPolynomial, false);
+        }
+
+        /* private method to add or subtract polynomials */
+        private static Polynomial AddOrSubtractPolynomials(Polynomial firstPolynomial, Polynomial secondPolynomial, bool isAddition)
+        {
             int firstPolyLength = firstPolynomial.coefficients.Length;
             int secondPolyLength = secondPolynomial.coefficients.Length;
-            int maxLength;
-            if (firstPolyLength < secondPolyLength)
-            {
-                maxLength = secondPolyLength;
-            }
-            else
-            {
-                maxLength = firstPolyLength;
-            }
+            int maxLength = Math.Max(firstPolyLength, secondPolyLength);
             double[] polynomialResult = new double[maxLength];
 
             for (int i = 0; i < maxLength; i++)
             {
-                double firstPolynomialCoefficient = 0;
-                double secondPolynomialCoefficient = 0;
-
-                if (i < firstPolyLength)
-                {
-                    firstPolynomialCoefficient = firstPolynomial.coefficients[i];
-                }
-                if (i < secondPolyLength)
-                {
-                    secondPolynomialCoefficient = secondPolynomial.coefficients[i];
-                }
-                polynomialResult[i] = firstPolynomialCoefficient - secondPolynomialCoefficient;
+                double firstPolynomialCoefficient = i < firstPolyLength ? firstPolynomial.coefficients[i] : 0;
+                double secondPolynomialCoefficient = i < secondPolyLength ? secondPolynomial.coefficients[i] : 0;
+                double resultCoefficient = isAddition ? firstPolynomialCoefficient + secondPolynomialCoefficient : firstPolynomialCoefficient - secondPolynomialCoefficient;
+                polynomialResult[i] = resultCoefficient;
             }
 
             return new Polynomial(polynomialResult);
