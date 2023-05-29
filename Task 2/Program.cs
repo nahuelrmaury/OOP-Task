@@ -12,115 +12,133 @@ namespace Task_2
         static void Main(string[] args)
         {
             Bear bear = new Bear();
-            bear.Eat("Animal food example","Plant food example");
+            bear.EatAnimal("Animal food example");
+            bear.EatPlant("Plant food example");
             bear.NameSpecie();
             bear.NameParticularIndividual();
-        }
-    }
 
-    public abstract class Alive
-    {
-        public abstract string NameSpecie();
-    }
+            Wolf wolf = new Wolf();
+            wolf.EatAnimal("Animal food example");
+            wolf.NameSpecie();
+            wolf.NameParticularIndividual();
 
-    public abstract class Animal : Alive
-    {
-        public abstract string NameParticularIndividual();
-    }
+            Rabbit rabbit = new Rabbit();
+            rabbit.EatPlant("Plant food example");
+            rabbit.NameSpecie();
+            rabbit.NameParticularIndividual();
 
-    public abstract class Herbal : Alive
-    {
-    }
+            Rose rose = new Rose();
+            rose.NameSpecie();
 
-    public abstract class Herbivore : Animal
-    {
-        public abstract string Eat(string plant);
-    }
-
-    public abstract class Carnivore : Animal
-    {
-        public abstract string Eat(string animal);
-    }
-
-    public abstract class Omnivore : Animal
-    {
-        public abstract string Eat(string animal, string plant);
-    }
-
-    public class Bear : Omnivore
-    {
-        public override string NameSpecie()
-        {
-            Console.WriteLine("Ursidae");
-            return "Ursidae";
+            Grass grass = new Grass();
+            grass.NameSpecie();
         }
 
-        public override string NameParticularIndividual()
+        public abstract class Alive
         {
-            Console.WriteLine("Panda Bear");
-            return "Panda Bear";
+            public abstract string NameSpecie();
         }
 
-        public override string Eat(string animal, string plant)
+        public abstract class Animal : Alive
         {
-            Console.WriteLine("Eat: " + animal + " and " + plant);
-            return animal + " and " + plant;
+            public abstract string NameParticularIndividual();
         }
-    }
 
-    public class Wolf : Carnivore
-    {
-        public override string NameSpecie()
+        public abstract class Herbal : Alive
         {
-            Console.WriteLine("Canis lupus");
-            return "Canis lupus";
         }
-        public override string NameParticularIndividual()
-        {
-            Console.WriteLine("Canis lupus arctos");
-            return "Canis lupus arctos";
-        }
-        public override string Eat(string animal)
-        {
-            Console.WriteLine("Eat: " + animal);
-            return animal;
-        }
-    }
 
-    public class Rabbit : Herbivore
-    {
-        public override string NameSpecie()
+        public interface IHerbivore
         {
-            Console.WriteLine("Oryctolagus cuniculos");
-            return "Oryctolagus cuniculus";
+            public abstract string EatPlant(string plant);
         }
-        public override string NameParticularIndividual()
-        {
-            Console.WriteLine("Leporidae Romerolagus");
-            return "Leporidae Romerolagus";
-        }
-        public override string Eat(string plant)
-        {
-            Console.WriteLine("Eat: " + plant);
-            return plant;
-        }
-    }
 
-    public class Rose : Herbal
-    {
-        public override string NameSpecie()
+        public interface ICarnivore
         {
-            Console.WriteLine("Rosa rubiginosa");
-            return "Rosa rubiginosa";
+            public abstract string EatAnimal(string animal);
         }
-    }
 
-    public class Grass : Herbal
-    {
-        public override string NameSpecie()
+        public class Bear : Animal, IHerbivore, ICarnivore
         {
-            Console.WriteLine("Poaceae");
-            return "Poaceae";
+            public override string NameSpecie()
+            {
+                Console.WriteLine("Ursidae");
+                return "Ursidae";
+            }
+
+            public override string NameParticularIndividual()
+            {
+                Console.WriteLine("Panda Bear");
+                return "Panda Bear";
+            }
+
+            public string EatPlant(string plant)
+            {
+                Console.WriteLine("Eat plant: " + plant);
+                return plant;
+            }
+
+            public string EatAnimal(string animal)
+            {
+                Console.WriteLine("Eat animal: " + animal);
+                return animal;
+            }
+        }
+
+        public class Wolf : Animal, ICarnivore
+        {
+            public override string NameSpecie()
+            {
+                Console.WriteLine("Canis lupus");
+                return "Canis lupus";
+            }
+            public override string NameParticularIndividual()
+            {
+                Console.WriteLine("Canis lupus arctos");
+                return "Canis lupus arctos";
+            }
+            public string EatAnimal(string animal)
+            {
+                Console.WriteLine("Eat animal: " + animal);
+                return animal;
+            }
+        }
+
+        public class Rabbit : Animal, IHerbivore
+        {
+            public override string NameSpecie()
+            {
+                Console.WriteLine("Oryctolagus cuniculos");
+                return "Oryctolagus cuniculus";
+            }
+            public override string NameParticularIndividual()
+            {
+                Console.WriteLine("Leporidae Romerolagus");
+                return "Leporidae Romerolagus";
+            }
+            public string EatPlant(string plant)
+            {
+                Console.WriteLine("Eat plant: " + plant);
+                return plant;
+            }
+        }
+
+        public class Rose : Herbal
+        {
+            public override string NameSpecie()
+            {
+                Console.WriteLine("Rosa rubiginosa");
+                return "Rosa rubiginosa";
+            }
+        }
+
+        public class Grass : Herbal
+        {
+            public override string NameSpecie()
+            {
+                Console.WriteLine("Poaceae");
+                return "Poaceae";
+            }
         }
     }
 }
